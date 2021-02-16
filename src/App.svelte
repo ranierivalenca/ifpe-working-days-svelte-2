@@ -138,15 +138,32 @@
 </script>
 
 <style>
-  table, td {
+  * {
+    font-family: sans-serif;
+  }
+  table {
+    margin-top: 1em;
+  }
+  table, td, th {
     border: 1px solid black;
     border-collapse: collapse
   }
-  td {
-    padding: .5em;
+  td, th {
+    padding: .5em .8em;
+    text-align: center;
   }
   td.dia {
     background: hsl
+  }
+  tr:first-child > th {
+    border-bottom-width: 5px;
+  }
+  th:first-child, td:first-child {
+    border-right-width: 5px;
+  }
+  th:last-child, td:last-child {
+    /*background: hsl(0, 0%, 80%);*/
+    border-left-width: 5px;
   }
   td.special {
     color: hsl(0, 100%, 30%)
@@ -167,6 +184,8 @@
   }
 </style>
 
+<h1>Dias Letivos</h1>
+
 <input bind:value={start_date} type="date">
 <button class:active="{days_per_week == 5}" on:click={() => days_per_week = 5}>
   Segunda a Sexta (5 dias letivos)
@@ -177,8 +196,15 @@
 <label class:disabled="{days_per_week != 5}">
   <input type="checkbox" disabled="{days_per_week != 5}" bind:checked="{use_saturdays}" /> Usar sábados
 </label>
-<hr />
+
 <table>
+  <tr>
+    <th>Semana</th>
+    {#each range(number_of_weeks) as week}
+      <th>{week + 1}</th>
+    {/each}
+    <th>Feriados</th>
+  </tr>
   {#each final_days as day, day_i}
     <tr>
       <td class="dia">{WEEKDAYS[day_i]}</td>
@@ -189,6 +215,13 @@
           <td>{working_day.date}</td>
         {/if}
       {/each}
+      <td>
+        {#if hollidays[day_i].length}
+          {#each hollidays[day_i] as holliday}
+            <div>{formatDate(holliday.timestamp, false)}</div>
+          {/each}
+        {/if}
+      </td>
     </tr>
   {/each}
 </table>
