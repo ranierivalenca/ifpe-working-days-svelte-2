@@ -59,7 +59,7 @@
 
   let updateLastDay = () => {
     end_timestamp = 0
-    for (i = 0; i < days.length; i++) {
+    for (let i = 0; i < days.length; i++) {
       if (days[days.length - 1 - i].timestamp > end_timestamp) {
         end_timestamp = days[days.length - 1 - i].timestamp
       }
