@@ -5,7 +5,7 @@
   const DAY = 24 * HOUR
   const WEEK = 7 * DAY
   const WEEKDAYS = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab']
-  const NATIONAL_HOLLIDAYS = {
+  const NATIONAL_HOLIDAYS = {
     '01/01': 'Confraternização Universal',
     '21/04': 'Tiradentes',
     '01/05': 'Dia do Trabalhador',
@@ -15,9 +15,9 @@
     '15/11': 'Proclamação da República',
     '25/12': 'Natal'
   }
-  const HOLLIDAYS = ['21/04', '01/05', '03/06', '07/09', '11/10', '12/10', '28/10', '01/11', '02/11', '15/11', '08/12', '24/12', '25/12', '31/12', '01/01', '01/02', '02/02']
+  const HOLIDAYS = ['21/04', '01/05', '03/06', '07/09', '11/10', '12/10', '28/10', '01/11', '02/11', '15/11', '08/12', '24/12', '25/12', '31/12', '01/01', '01/02', '02/02']
 
-  let hollidays = {
+  let holidays = {
     '03/06': 'Corpus Christi',
     '29/09': 'Feriado local',
     '11/10': 'Nossa Senhora Aparecida',
@@ -28,7 +28,7 @@
     '02/02/2022': 'Carnaval'
   }
 
-  let hollidays_dates = Object.keys(hollidays)
+  let holidays_dates = Object.keys(holidays)
 
 
   let start_date = '2021-10-22'
@@ -43,20 +43,20 @@
   let dias_letivos = []
   let days = []
   let formatted_days = []
-  let formatted_hollidays = []
+  let formatted_holidays = []
 
 
-  let removeHolliday = key => {
-    delete hollidays[key]
-    hollidays_dates = Object.keys(hollidays)
-    console.log(hollidays)
+  let removeHoliday = key => {
+    delete holidays[key]
+    holidays_dates = Object.keys(holidays)
+    console.log(holidays)
   }
 
-  let isHolliday = timestamp => {
+  let isHoliday = timestamp => {
     let formatted = formatDate(timestamp, false)
     let formatted_full = formatDate(timestamp)
 
-    return !!NATIONAL_HOLLIDAYS[formatted] || !!hollidays[formatted] || !!hollidays[formatted_full]
+    return !!NATIONAL_HOLIDAYS[formatted] || !!holidays[formatted] || !!holidays[formatted_full]
   }
 
   let range = (els) => [...Array(els).keys()]
@@ -84,11 +84,11 @@
       let ts = firsts[day] + week * WEEK;
 
 //      (i < days_per_week) ? null : console.log(days[i - days_per_week].timestamp, formatDate(days[i - days_per_week].timestamp), ts, formatDate(ts))
-      if (isHolliday(ts)) {
-        formatted_hollidays[myWeekDay(ts)].push({date: formatDate(ts, false), timestamp: ts})
+      if (isHoliday(ts)) {
+        formatted_holidays[myWeekDay(ts)].push({date: formatDate(ts, false), timestamp: ts})
       }
 
-      while (isHolliday(ts) || (i > days_per_week && days[i - days_per_week].timestamp >= ts)) {
+      while (isHoliday(ts) || (i > days_per_week && days[i - days_per_week].timestamp >= ts)) {
         ts += WEEK
       }
       days[i] = {date: formatDate(ts, false), timestamp: ts}
@@ -109,7 +109,7 @@
     let working_days = []
 
     while (ts <= end_timestamp) {
-      if (myWeekDay(ts) != 6 && !isHolliday(ts)) {
+      if (myWeekDay(ts) != 6 && !isHoliday(ts)) {
         if (myWeekDay(ts) < 5 || days_per_week == 6 || use_saturdays) {
 //          let available = !days.map(d => formatDate(d.timestamp)).includes(formatDate(ts))
           let available = days.filter(d => d.timestamp == ts).length == 0
@@ -132,7 +132,7 @@
       return
     }
     days = Array(number_of_weeks * days_per_week).fill(null)
-    formatted_hollidays = Array(days_per_week).fill(0).map(h => [])
+    formatted_holidays = Array(days_per_week).fill(0).map(h => [])
 
     fillDays()
     updateLastDay()
@@ -167,9 +167,9 @@
     console.log(days)
     console.log(formatted_days)
     console.log(formatDate(end_timestamp))
-    console.log(formatted_hollidays)
+    console.log(formatted_holidays)
 
-  })(days_per_week, use_saturdays, start_date, hollidays_dates)
+  })(days_per_week, use_saturdays, start_date, holidays_dates)
   //  $: (() => setup(dias_por_semana))(usar_sabados)
 
 
@@ -220,14 +220,14 @@
   .disabled {
     color: hsl(0, 0%, 80%)
   }
-  .holliday {
+  .holiday {
     margin: .2em;
     background: hsl(200, 100%, 80%);
     padding: .2em .5em;
     border-radius: 1em;
     display: inline-block;
   }
-  .holliday > span {
+  .holiday > span {
     border-radius: 50%;
     background: hsl(20, 100%, 90%);
     display: inline-block;
@@ -238,7 +238,7 @@
     line-height: 1.2em;
     cursor: pointer;
   }
-  .national-holliday {
+  .national-holiday {
     background: hsl(200, 100%, 30%);
     color: white;
   }
@@ -260,14 +260,14 @@
 </label>
 
 <h2>Feriados</h2>
-{#each hollidays_dates as holliday}
-  <div class="holliday">
-    {holliday} - {hollidays[holliday]} <span on:click={() => removeHolliday(holliday)}>&times;</span>
+{#each holidays_dates as holiday}
+  <div class="holiday">
+    {holiday} - {holidays[holiday]} <span on:click={() => removeHoliday(holiday)}>&times;</span>
   </div>
 {/each}
-{#each Object.keys(NATIONAL_HOLLIDAYS) as holliday}
-  <div class="holliday national-holliday">
-    {holliday} - {NATIONAL_HOLLIDAYS[holliday]}
+{#each Object.keys(NATIONAL_HOLIDAYS) as holiday}
+  <div class="holiday national-holiday">
+    {holiday} - {NATIONAL_HOLIDAYS[holiday]}
   </div>
 {/each}
 
@@ -290,9 +290,9 @@
         {/if}
       {/each}
       <td>
-        {#if formatted_hollidays[day_i].length}
-          {#each formatted_hollidays[day_i] as holliday}
-            <div>{formatDate(holliday.timestamp, false)}</div>
+        {#if formatted_holidays[day_i].length}
+          {#each formatted_holidays[day_i] as holiday}
+            <div>{formatDate(holiday.timestamp, false)}</div>
           {/each}
         {/if}
       </td>
