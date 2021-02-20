@@ -1,4 +1,6 @@
 <script>
+  import Tailwindcss from './Tailwind.svelte'
+
   const HOUR = 60 * 60 * 1000
   const DAY = 24 * HOUR
   const WEEK = 7 * DAY
@@ -241,6 +243,8 @@
     color: white;
   }
 </style>
+
+<Tailwindcss />
 
 <h1>Dias Letivos</h1>
 

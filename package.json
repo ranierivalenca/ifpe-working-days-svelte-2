@@ -2,7 +2,7 @@
   "name": "svelte-app",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --environment NODE_ENV:production",
     "dev": "rollup -c -w",
     "start": "sirv public"
   },
@@ -16,6 +16,9 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "sirv-cli": "^1.0.0"
+    "postcss-load-config": "^3.0.1",
+    "sirv-cli": "^1.0.0",
+    "svelte-preprocess": "^4.6.9",
+    "tailwindcss": "^2.0.3"
   }
 }
