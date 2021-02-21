@@ -107,16 +107,16 @@
   </main>
   <footer class="bg-green-900 text-white h-16 p-4 flex items-center text-xs">
     <div class="flex justify-between w-full">
-      <div>Made by <a href="github.com/ranierivalenca" class="font-bold">Ranieri Valença</a></div>
+      <div>Made by <a href="https://github.com/ranierivalenca" class="font-bold">Ranieri Valença</a></div>
       <div>
         <p>
           Powered by
-          <a href="svelte.dev" class="font-bold"><img src="https://svelte.dev/favicon.png" class="inline h-5"> Svelte</a> and
-          <a href="tailwindcss.com" class="font-bold"><img src="https://tailwindcss.com/favicon-32x32.png" class="inline h-5"> Tailwindcss</a>
+          <a href="https://svelte.dev" class="font-bold"><img src="https://svelte.dev/favicon.png" class="inline h-5"> Svelte</a> and
+          <a href="https://tailwindcss.com" class="font-bold"><img src="https://tailwindcss.com/favicon-32x32.png" class="inline h-5"> Tailwindcss</a>
         </p>
         <p>
           Hosted on
-          <a href="vercel.com" class="font-bold"><img src="https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/57x57.png" class="inline h-5">  Vercel</a>
+          <a href="https://vercel.com" class="font-bold"><img src="https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/57x57.png" class="inline h-5">  Vercel</a>
         </p>
       </div>
       <div>
