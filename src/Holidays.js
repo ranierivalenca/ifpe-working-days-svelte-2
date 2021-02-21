@@ -28,26 +28,28 @@ const HOUR = utils.HOUR_MS
 class Holidays {
   holidays = []
 
-  constructor() {
-
-    this.holidays = [
-      ...Object.keys(NATIONAL_HOLIDAYS).map(d => {
-        return {
-          'day': d,
-          'fixed': true,
-          'national': true,
-          'desc': NATIONAL_HOLIDAYS[d]
-        }
-      }),
-      ...Object.keys(DEFAULT_HOLIDAYS).map(d => {
-        return {
-          'day': d,
-          'fixed': d.length == 5,
-          'national': false,
-          'desc': DEFAULT_HOLIDAYS[d]
-        }
-      })
-    ]
+  constructor(holidays = []) {
+    this.holidays = [...holidays]
+    if (!holidays.length) {
+      this.holidays = [
+          ...Object.keys(NATIONAL_HOLIDAYS).map(d => {
+          return {
+              'day': d,
+              'fixed': true,
+              'national': true,
+              'desc': NATIONAL_HOLIDAYS[d]
+          }
+          }),
+          ...Object.keys(DEFAULT_HOLIDAYS).map(d => {
+          return {
+              'day': d,
+              'fixed': d.length == 5,
+              'national': false,
+              'desc': DEFAULT_HOLIDAYS[d]
+          }
+          })
+      ]
+    }
     this.sort()
   }
 

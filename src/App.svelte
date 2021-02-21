@@ -12,17 +12,20 @@
   const formatDate = utils.formatDate
   const WEEKDAYS = utils.WEEKDAYS
 
-  let holidays = new Holidays()
+  let holidays = new Holidays(JSON.parse(localStorage.getItem('holidays')) ?? [])
+  // let holidays = new Holidays()
   let workingDays = new WorkingDays(holidays)
 
+  let show_holidays = false
 
-
-  let show_holidays = true
-
-  let update = () => {
-    workingDays.setStartDay()
+  let update = (day = null) => {
+    workingDays.setStartDay(day)
     workingDays = workingDays
+    localStorage.setItem('holidays', JSON.stringify(holidays.holidays))
+    localStorage.setItem('start_date', workingDays.start_date)
   }
+
+  update(localStorage.getItem('start_date'))
 
   $:(() => {
     update()
