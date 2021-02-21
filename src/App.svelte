@@ -35,12 +35,12 @@
 
 <Tailwindcss />
 
-<div class="max-w-7xl bg-gray-100 m-auto min-h-screen">
+<div class="flex flex-col justify-between max-w-7xl bg-gray-100 m-auto min-h-screen">
   <nav class="p-2 py-4 bg-green-600">
     <h1 class="text-xl text-white">Dias Letivos</h1>
   </nav>
 
-  <main class="p-2">
+  <main class="p-2 mb-auto">
 
     <div class="border border-gray-300 rounded-lg shadow-lg p-2 grid grid-cols-3">
       <div>
@@ -105,4 +105,23 @@
       Último dia letivo: <span class="font-bold">{workingDays.last_day.date}</span>
     </div>
   </main>
+  <footer class="bg-green-900 text-white h-16 p-4 flex items-center text-xs">
+    <div class="flex justify-between w-full">
+      <div>Made by <a href="github.com/ranierivalenca" class="font-bold">Ranieri Valença</a></div>
+      <div>
+        <p>
+          Powered by
+          <a href="svelte.dev" class="font-bold"><img src="https://svelte.dev/favicon.png" class="inline h-5"> Svelte</a> and
+          <a href="tailwindcss.com" class="font-bold"><img src="https://tailwindcss.com/favicon-32x32.png" class="inline h-5"> Tailwindcss</a>
+        </p>
+        <p>
+          Hosted on
+          <a href="vercel.com" class="font-bold"><img src="https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/57x57.png" class="inline h-5">  Vercel</a>
+        </p>
+      </div>
+      <div>
+        Available on <a href="https://github.com/ranierivalenca/ifpe-working-days-svelte-2" class="font-bold">github.com</a>
+      </div>
+    </div>
+  </footer>
 </div>
