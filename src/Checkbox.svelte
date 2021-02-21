@@ -2,7 +2,7 @@
   export let status = false
   export let color_on = 'green-500'
   export let color_off = 'gray-500'
-  export let disabled
+  export let disabled = false
 </script>
 
 

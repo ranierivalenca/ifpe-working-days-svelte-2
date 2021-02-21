@@ -5,9 +5,11 @@ import utils from './utils'
 const weekDay = utils.weekDay
 const formatDate = utils.formatDate
 
-const HOUR = 60 * 60 * 1000
-const DAY = 24 * HOUR
-const WEEK = 7 * DAY
+const HOUR = utils.HOUR_MS
+const DAY = utils.DAY_MS
+const WEEK = utils.WEEK_MS
+const WEEKDAYS = utils.WEEKDAYS
+
 const _MON = 0
 const _TUE = 1
 const _WED = 2
@@ -15,7 +17,6 @@ const _THU = 3
 const _FRI = 4
 const _SAT = 5
 const _SUN = 6
-const WEEKDAYS = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab']
 
 class WorkingDays {
   // global objects
@@ -53,14 +54,19 @@ class WorkingDays {
     this.working_days = Array(this.number_of_weeks * this.days_per_week).fill(null)
 
     this.weekdays = [] // updated later
-    this.weekdays_holidays = Array(this.days_per_week).fill(0).map(h => [])
+    this.weekdays_holidays = [] // updated later
 
     this.setStartDay(formatDate(new Date()).split('/').reverse().join('-'))
   }
 
   setStartDay(start_date) {
-    this.start_date = start_date
+    if (start_date) {
+      this.start_date = start_date
+    }
     this.start_timestamp = Date.parse(this.start_date) + 12 * HOUR
+    if (!this.start_timestamp) {
+      throw Error("Could not proceed")
+    }
     this.end_timestamp = 0
     this.last_day = null
     this.fillDays()
@@ -123,9 +129,6 @@ class WorkingDays {
         this.holidays.isHoliday(ts) ||
         (i > this.days_per_week && this.working_days[i - this.days_per_week].timestamp >= ts)
       ) {
-        if (this.holidays.isHoliday(ts)) {
-          this.weekdays_holidays[weekDay(ts)].push({date: formatDate(ts, false), timestamp: ts})
-        }
         ts += WEEK
       }
       this.working_days[i] = {date: formatDate(ts, false), timestamp: ts}
@@ -161,6 +164,15 @@ class WorkingDays {
       days.sort((d1, d2) => d1.timestamp - d2.timestamp)
       return days
     })
+
+    this.weekdays_holidays = Array(this.days_per_week).fill(null).map(h => [])
+    let holidays = this.holidays.getHolidaysBetween(this.start_timestamp, this.end_timestamp)
+    for (let holiday of holidays) {
+      let weekday = weekDay(holiday.timestamp)
+      if (weekday < this.days_per_week) {
+        this.weekdays_holidays[weekday].push(holiday)
+      }
+    }
   }
 }
 
