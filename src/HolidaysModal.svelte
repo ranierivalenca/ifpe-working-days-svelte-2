@@ -91,7 +91,7 @@
           <input class="border p-2 w-full rounded-md" id="holiday_date" type="date" bind:value={day}>
         </div>
         <div class="p-2 flex items-center justify-center">
-          <Checkbox color_on="blue-500" bind:status={fixed}>
+          <Checkbox color_on="bg-blue-500" bind:status={fixed}>
             Feriado fixo
           </Checkbox>
         </div>
@@ -100,7 +100,7 @@
           <input class="border p-2 w-full rounded-md" id="holiday_desc" type="text" bind:value={description}>
         </div>
         <div class="align-center">
-          <label class="text-md block">&nbsp;</label>
+          <div class="text-md block">&nbsp;</div>
           <div class="block w-full flex justify-center">
             <button class="border p-2 px-12 bg-blue-200 rounded-md">Salvar</button>
           </div>
