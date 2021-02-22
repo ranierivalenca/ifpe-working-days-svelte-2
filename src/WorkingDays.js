@@ -174,6 +174,10 @@ class WorkingDays {
       }
     }
   }
+
+  getDay(ts) {
+    return this.working_days.find(d => d.date == formatDate(ts, false))
+  }
 }
 
 export default WorkingDays
