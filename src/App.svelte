@@ -68,12 +68,11 @@
       <HolidaysModal
         bind:holidays={holidays}
         on:close={() => show_holidays = false}
-        on:update={update}
+        on:update={() => update()}
       />
     {/if}
 
     <div class="overflow-x-auto mt-4">
-
       <table class="min-w-full border-2 border-green-900">
         <tr>
           <th class="border-2 border-green-900 p-1">Semana</th>
