@@ -2,9 +2,11 @@
   import Tailwindcss from './Tailwind.svelte'
   import Checkbox from './Checkbox.svelte'
   import HolidaysModal from './HolidaysModal.svelte'
+  import Calendar from './Calendar.svelte'
 
   import WorkingDays from './WorkingDays'
   import Holidays from './Holidays'
+
 
   import utils from './utils'
   const range = utils.range
@@ -17,6 +19,7 @@
   let workingDays = new WorkingDays(holidays)
 
   let show_holidays = false
+  let show_calendar = false
 
   let update = (day = null) => {
     workingDays.setStartDay(day)
@@ -41,7 +44,6 @@
   </nav>
 
   <main class="p-2 mb-auto">
-
     <div class="border border-gray-300 rounded-lg shadow-lg p-2 grid grid-cols-3">
       <div>
         <label for="start_date" class="text-sm block">Dia Inicial:</label>
@@ -103,7 +105,18 @@
     <div class="text-lg">
       Último dia letivo: <span class="font-bold">{workingDays.last_day.date}</span>
     </div>
+
+    <div class="bg-gray-200 border border-gray-200">
+      <h1 class="text-xl p-2 cursor-pointer hover:bg-gray-300" on:click={() => show_calendar = !show_calendar}>Calendário</h1>
+      <div class="bg-white p-2" class:hidden={!show_calendar}>
+        <Calendar bind:working_days={workingDays} />
+      </div>
+    </div>
   </main>
+
+
+
+
   <footer class="bg-green-900 text-white h-16 p-4 flex items-center text-xs">
     <div class="flex justify-between w-full">
       <div>Made by <a href="https://github.com/ranierivalenca" class="font-bold">Ranieri Valença</a></div>
