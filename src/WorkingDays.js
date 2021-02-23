@@ -65,7 +65,8 @@ class WorkingDays {
     }
     this.start_timestamp = Date.parse(this.start_date) + 12 * HOUR
     if (!this.start_timestamp) {
-      throw Error("Could not proceed")
+      // throw Error("Could not proceed")
+      return
     }
     this.end_timestamp = 0
     this.last_day = null
