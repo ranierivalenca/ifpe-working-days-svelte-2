@@ -115,6 +115,9 @@ class WorkingDays {
     for (let week_day = 0; week_day < this.days_per_week; week_day++) {
       for (let i = 0; weekDay(firsts[week_day]) != week_day; i++) {
         firsts[week_day] = this.start_timestamp + DAY * i
+        while (this.holidays.isHoliday(firsts[week_day])) {
+          firsts[week_day] += WEEK
+        }
       }
     }
 
