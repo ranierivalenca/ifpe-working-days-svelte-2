@@ -38,6 +38,23 @@
 
 <Tailwindcss />
 
+<style>
+  .arrow {
+    border: solid black;
+    border-width: 0 .25em .25em 0;
+    padding: .25em;
+  }
+
+  .arrow-down {
+    transform: rotate(45deg);
+  }
+
+  .arrow-up {
+    margin-top:.25em;
+    transform: rotate(-135deg);
+  }
+</style>
+
 <div class="flex flex-col justify-between max-w-7xl bg-gray-100 m-auto min-h-screen">
   <nav class="p-2 py-4 bg-green-600">
     <h1 class="text-xl text-white">Dias Letivos</h1>
@@ -56,7 +73,7 @@
         </Checkbox>
       </div>
 
-      <button class="bg-green-200 hover:bg-green-400 rounded-md" on:click={() => show_holidays = true}>Feriados</button>
+      <button class="bg-green-200 hover:bg-green-400 rounded-md" on:click={() => show_holidays = true}>Gerenciar feriados</button>
     </div>
 
     <!-- <button class:active="{days_per_week == 5}" on:click={() => days_per_week = 5}>
@@ -107,7 +124,14 @@
     </div>
 
     <div class="bg-gray-200 border border-gray-200">
-      <h1 class="text-xl p-2 cursor-pointer hover:bg-gray-300" on:click={() => show_calendar = !show_calendar}>Calendário</h1>
+      <h1 class="text-xl p-2 cursor-pointer hover:bg-gray-300" on:click={() => show_calendar = !show_calendar}>
+        Ver calendário
+        <span
+          class="float-right arrow"
+          class:arrow-down={!show_calendar}
+          class:arrow-up={show_calendar}
+        ></span>
+      </h1>
       <div class="bg-white p-2" class:hidden={!show_calendar}>
         <Calendar bind:working_days={workingDays} />
       </div>

@@ -14,7 +14,8 @@
   <div class="absolute bg-gray-400 opacity-50 w-full h-full rounded-full z-10" class:hidden={!disabled}></div>
 
   <div class="flex cursor-pointer">
-    <div class="h-6 w-14 flex items-center relative mr-2">
+    <slot></slot>
+    <div class="h-6 w-14 flex items-center relative ml-2">
       <div class="bg-gray-300 rounded-full w-14 h-6">
       </div>
       <div
@@ -25,6 +26,5 @@
       </div>
     </div>
 
-    <slot></slot>
   </div>
 </label>
