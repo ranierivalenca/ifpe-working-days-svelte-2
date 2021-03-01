@@ -143,14 +143,34 @@ class WorkingDays {
     this.updateWeekdays()
   }
 
-  compactDays() {
+  compactDays(fit_first = true) {
+    let swap = (idx, day) => {
+      let new_ts =day.timestamp
+      this.working_days[idx] = {date: formatDate(new_ts, false), timestamp: new_ts, special: true}
+    }
+
     let available_days = this.getDays(true)
+    // while (available_days.length > this.days_per_week) {
+    //   let weeks = Math.floor((available_days.length - 1) / this.days_per_week)
+    //   console.log('available: ' + available_days.length)
+    //   console.log('weeks:' + weeks)
+    //   for (let i = 0; i < weeks * this.days_per_week; i++) {
+    //     console.log(i)
+    //     let day_index = this.working_days.length - weeks * this.days_per_week + i
+    //     console.log(this.working_days[day_index])
+    //     let day_to_move = fit_first ? available_days.shift() : available_days.pop()
+    //     // let day_to_move = available_days.shift()
+    //     console.log(day_to_move, formatDate(day_to_move.timestamp))
+    //     swap(day_index, day_to_move)
+    //   }
+    // }
     while (available_days.length > 0) {
       let last_day_index = this.working_days.findIndex(d => d.timestamp == this.end_timestamp)
-      let day_to_move = available_days.pop()
-      let new_ts = day_to_move.timestamp
-      // console.log(`moving ${days[last_day_index].date} to ${formatDate(day_to_move.timestamp)}`)
-      this.working_days[last_day_index] = {date: formatDate(new_ts, false), timestamp: new_ts, special: true}
+      let day_to_move = fit_first ? available_days.shift() : available_days.pop()
+      swap(last_day_index, day_to_move)
+      // let new_ts = day_to_move.timestamp
+      // // console.log(`moving ${days[last_day_index].date} to ${formatDate(day_to_move.timestamp)}`)
+      // this.working_days[last_day_index] = {date: formatDate(new_ts, false), timestamp: new_ts, special: true}
 
       this.updateLastDay()
       available_days = this.getDays(true)
