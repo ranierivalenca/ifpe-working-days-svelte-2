@@ -66,6 +66,7 @@
   }
 </script>
 
+<span class="bg-green-300 text-gray-400 gb-blue-500"></span>
 {#each months as [month, year], i}
   <h2 class="border-t border-gray-300 pt-4 pb-4 text-lg font-bold text-center mt-2">{month} / {year}</h2>
   <div class="grid grid-cols-7 text-center gap-2">
