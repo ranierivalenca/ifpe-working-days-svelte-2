@@ -163,7 +163,9 @@ class WorkingDays {
     this.weekdays = Array(this.days_per_week).fill(null).map((weekday, day) => {
       let days = []
       for (let week = 0; week < this.number_of_weeks; week++) {
-        days.push(getDayWeek(day, week))
+        let _day = getDayWeek(day, week)
+        _day.weekday = day
+        days.push(_day)
       }
       days.sort((d1, d2) => d1.timestamp - d2.timestamp)
       return days
