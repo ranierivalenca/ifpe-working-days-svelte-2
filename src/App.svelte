@@ -98,7 +98,7 @@
           {#each range(workingDays.number_of_weeks) as week}
             <th class="border-2 border-green-900 p-1">{week + 1}</th>
           {/each}
-          <th class="border-2 border-green-900 p-1">Feriados</th>
+          <th class="border-2 border-green-900 bg-blue-500 text-white p-1">Feriados</th>
         </tr>
         {#each workingDays.weekdays as weeks, day}
           <tr>
@@ -110,16 +110,18 @@
                 <td class="border-2 border-green-900 p-1">{working_day.date}</td>
               {/if}
             {/each}
-            <td class="border-2 border-green-900 p-1">
+            <td class="border-2 border-green-900 bg-blue-500 text-white p-1">
               {#each workingDays.weekdays_holidays[day] as holiday}
                 <div>{formatDate(holiday.timestamp, false)}</div>
+              {:else}
+                <div>-</div>
               {/each}
             </td>
           </tr>
         {/each}
       </table>
     </div>
-    <div class="text-lg">
+    <div class="text-xl my-2 bg-gray-900 text-white p-2">
       Último dia letivo: <span class="font-bold">{workingDays.last_day.date}</span>
     </div>
 
